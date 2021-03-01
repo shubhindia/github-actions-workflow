@@ -58,4 +58,4 @@ jobs:
        # List of external cache sources for buildx (eg. user/app:cache, type=local,src=path/to/dir)
         ssh: # optional
        # GitHub Token used to authenticate against a repository for Git context
-       github-token: # optional, default is ${{ github.token }}
+        github-token: # optional, default is ${{ github.token }}
