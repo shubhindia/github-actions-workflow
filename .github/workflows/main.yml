@@ -31,6 +31,12 @@ jobs:
           docker build -t shubhindia/gh-actions-test .
           docker push shubhindia/gh-actions-test
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+
       - name: Set kubernetes context
         uses: Azure/k8s-set-context@v1
         with:
@@ -39,4 +45,4 @@ jobs:
 
       - name: Deploy the image in kubernetes
         run: |
-          kubectl get ns
+          kubectl apply -f ntsuserservice-deployment.yaml
