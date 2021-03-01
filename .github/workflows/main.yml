@@ -25,28 +25,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       
-      - name: Build and push Docker images
-        # You may pin to the exact commit or the version.
-        # uses: docker/build-push-action@9379083e426e2e84abb80c8c091f5cdeb7d3fd7a
-        #uses: docker/build-push-action@v2.3.0
-        #with:
-        #  builder: # optional
-        #  context: # optional
-        #  file: .
-        #  build-args:
-        #  labels: 
-        #  tags: shubhindia/ghactionstest
-        #  pull: 
-        #  target: 
-        #  allow: 
-        #  no-cache: 
-        #  platforms: 
-        #  load: 
-        #  push:
-        #  outputs: 
-        #  ssh: 
-        #  github-token: 
+      - name: Build and push Docker images 
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t shubhindia/gh-actions-test .
           docker push shubhindia/gh-actions-test
+
+      - name: Set kubernetes context
+        uses: Azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
