@@ -37,6 +37,9 @@ jobs:
 
     steps:
 
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Set kubernetes context
         uses: Azure/k8s-set-context@v1
         with:
