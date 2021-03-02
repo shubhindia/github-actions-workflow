@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: shubhi-vps-runner
+    runs-on: self-hosted
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -33,7 +33,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: shubhi-vps-runner
+    runs-on: self-hosted
 
     steps:
 
