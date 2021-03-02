@@ -23,7 +23,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        #uses: actions/checkout@v2
+        run : git clone --depth 1 https://github.com/${{ github.repository }} .
       
       - name: Build and push Docker images 
         run: |
