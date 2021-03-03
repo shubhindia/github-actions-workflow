@@ -24,6 +24,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: testing stuff
+        run: |
+          git log -1 --pretty=format:"{last_commit_hash: \"%H\", last_commit_timestamp: \"%cI\"}"
       - name: List directories
         run: ls -la
       - name: Build and push Docker images 
