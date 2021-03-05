@@ -36,17 +36,24 @@ jobs:
           git log -1 --pretty=format:"{last_commit_hash: \"%H\", last_commit_timestamp: \"%cI\"}"
       - name: List directories
         run: ls -la
+
       - name: Install virtualenv
         run: |
           pip install virtualenv
           virtualenv venv
           . venv/bin/activate
           pip install -r requirements.txt
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with: 
-          name: pip-packages
-          path: venv
+          
+      - name: Get pip cache dir
+        id: pip-cache
+        run: |
+          echo "::set-output name=dir::$(pip cache dir)"
+      
+      - name: caching
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ hashFiles('setup.py') }}-${{ hashFiles('dev-requirements.txt') }}
           
       - name: Build and push Docker images 
         run: |
