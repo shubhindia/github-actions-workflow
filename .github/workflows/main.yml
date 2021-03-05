@@ -39,7 +39,7 @@ jobs:
       - name: Install virtualenv
         run: |
           pip install virtualenv
-          vitrualenv venv
+          virtualenv venv
           . venv/bin/activate
           pip install -r requirments.txt
       - name: Upload artifacts
