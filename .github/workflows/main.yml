@@ -31,6 +31,18 @@ jobs:
           git log -1 --pretty=format:"{last_commit_hash: \"%H\", last_commit_timestamp: \"%cI\"}"
       - name: List directories
         run: ls -la
+      - name: Install virtualenv
+        run: |
+          pip3 install virtualenv
+          vitrualenv venv
+          . venv/bin/activate
+          pip3 install -r requirments.txt
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with: 
+          name: pip-packages
+          path: venv
+          
       - name: Build and push Docker images 
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
