@@ -26,6 +26,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        
       - name: testing stuff
         run: |
           git log -1 --pretty=format:"{last_commit_hash: \"%H\", last_commit_timestamp: \"%cI\"}"
@@ -33,10 +36,10 @@ jobs:
         run: ls -la
       - name: Install virtualenv
         run: |
-          pip3 install virtualenv
+          pip install virtualenv
           vitrualenv venv
           . venv/bin/activate
-          pip3 install -r requirments.txt
+          pip install -r requirments.txt
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with: 
