@@ -60,7 +60,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.6.9'
+          
       - name: caching
         uses: actions/cache@v2
         with:
