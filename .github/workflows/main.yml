@@ -41,6 +41,10 @@ jobs:
           . venv/bin/activate
           pip install -r requirements.txt
           
+      - name: Check the packages
+        run: |
+          pip freeze
+          
       - name: caching
         uses: actions/cache@v2
         with:
@@ -72,6 +76,11 @@ jobs:
           path: venv
           key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
           
+      - name: Activate virtual env and check the packages
+        run: |
+          . venv/bin/activate
+          pip freeze
+        
       - name: Set kubernetes context
         uses: Azure/k8s-set-context@v1
         with:
