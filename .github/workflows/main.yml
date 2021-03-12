@@ -44,10 +44,6 @@ jobs:
       - name: Check the packages
         run: |
           pip freeze
-      - name: Custom tests 🧪
-        uses: cypress-io/github-action@v1
-        with:
-         command: ls -lrt
       - name: caching
         uses: actions/cache@v2
         with:
