@@ -17,6 +17,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-18.04
+    services:
+      shcn:
+        image: shubhindia/shcn
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
