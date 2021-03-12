@@ -20,6 +20,9 @@ jobs:
     services:
       shcn:
         image: shubhindia/shcn
+        credentials:
+          username: shubhindia
+          password: ${{ secrets.DOCKER_PASSWORD}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
