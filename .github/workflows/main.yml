@@ -33,12 +33,6 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.6.9'
-        
-      - name: testing stuff
-        run: |
-          git log -1 --pretty=format:"{last_commit_hash: \"%H\", last_commit_timestamp: \"%cI\"}"
-      - name: List directories
-        run: ls -la
 
       - name: Install virtualenv
         run: |
