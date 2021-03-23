@@ -33,6 +33,9 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.6.9'
+          
+      - name: Set up github environment variables
+        uses: FranzDiebold/github-env-vars-action@v2
 
       - name: Install virtualenv
         run: |
@@ -40,7 +43,8 @@ jobs:
           virtualenv venv
           . venv/bin/activate
           pip install -r requirements.txt
-          echo "DOCKER_TAG=abcpqr-gh-test" >> $GITHUB_ENV
+          DOCKER_IMAGE_TAG=$(date +%s)-${CI_SHA_SHORT}-${CI_REF_NAME_SLUG}
+          echo $DOCKER_IMAGE_TAG >> $GITHUB_ENV
           
       - name: Check the packages
         run: |
@@ -56,8 +60,8 @@ jobs:
           #docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           #docker build -t shubhindia/gh-actions-test .
           #docker push shubhindia/gh-actions-test
-          TAG=$DOCKER_TAG
-          echo $TAG
+          echo 'test_url/${DOCKER_IMAGE_TAG}'
+          echo $DOCKER_IMAGE_TAG
 
   deploy:
     needs: build
