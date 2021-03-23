@@ -40,7 +40,7 @@ jobs:
           virtualenv venv
           . venv/bin/activate
           pip install -r requirements.txt
-          echo "DOCKER_TAG=shubhindia-gh-test" >> $GITHUB_ENV
+          echo "DOCKER_TAG=abcpqr-gh-test" >> $GITHUB_ENV
           
       - name: Check the packages
         run: |
