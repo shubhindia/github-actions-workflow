@@ -38,6 +38,7 @@ jobs:
         uses: FranzDiebold/github-env-vars-action@v2
 
       - name: Install virtualenv
+        id: docker-op
         run: |
           #pip install virtualenv
           #virtualenv venv
@@ -45,6 +46,7 @@ jobs:
           #pip install -r requirements.txt
           DOCKER_IMAGE_TAG=$(date +%s)-${CI_SHA_SHORT}-${CI_REF_NAME_SLUG}
           echo DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG >> $GITHUB_ENV
+          echo "::set-output name=mix-test::${DOCKER_IMAGE_TAG}"
           
       - name: Check the packages
         run: |
@@ -60,7 +62,7 @@ jobs:
           #docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           #docker build -t shubhindia/gh-actions-test .
           #docker push shubhindia/gh-actions-test
-          echo test_url/${DOCKER_IMAGE_TAG}
+          echo test_url/${{ steps.docker-op.outputs.mix-test}}
           echo $DOCKER_IMAGE_TAG
           echo "google.com/test&TAG=${DOCKER_IMAGE_TAG}&ENVIRONMENT=master"
           curl "https://www.google.com/search?q=${DOCKER_IMAGE_TAG}"
