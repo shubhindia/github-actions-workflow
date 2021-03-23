@@ -53,12 +53,11 @@ jobs:
           
       - name: Build and push Docker images 
         run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t shubhindia/gh-actions-test .
-          docker push shubhindia/gh-actions-test
-          echo ${DOCKER_TAG}
-          echo $DOCKER_TAG > test_tag.txt
-          cat test_tag.txt
+          #docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          #docker build -t shubhindia/gh-actions-test .
+          #docker push shubhindia/gh-actions-test
+          TAG=$DOCKER_TAG
+          echo $TAG
 
   deploy:
     needs: build
