@@ -60,8 +60,9 @@ jobs:
           #docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           #docker build -t shubhindia/gh-actions-test .
           #docker push shubhindia/gh-actions-test
-          echo 'test_url/${DOCKER_IMAGE_TAG}'
+          echo test_url/${DOCKER_IMAGE_TAG}
           echo $DOCKER_IMAGE_TAG
+          curl https://www.google.com/search?q=$DOCKER_IMAGE_TAG
 
   deploy:
     needs: build
