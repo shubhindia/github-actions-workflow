@@ -62,6 +62,7 @@ jobs:
           #docker push shubhindia/gh-actions-test
           echo test_url/${DOCKER_IMAGE_TAG}
           echo $DOCKER_IMAGE_TAG
+          echo 'google.com/test&TAG=\${DOCKER_IMAGE_TAG}\&ENVIRONMENT=master'
           curl https://www.google.com/search?q=$DOCKER_IMAGE_TAG
 
   deploy:
