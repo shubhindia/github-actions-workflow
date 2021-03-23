@@ -39,12 +39,12 @@ jobs:
 
       - name: Install virtualenv
         run: |
-          pip install virtualenv
-          virtualenv venv
-          . venv/bin/activate
-          pip install -r requirements.txt
+          #pip install virtualenv
+          #virtualenv venv
+          #. venv/bin/activate
+          #pip install -r requirements.txt
           DOCKER_IMAGE_TAG=$(date +%s)-${CI_SHA_SHORT}-${CI_REF_NAME_SLUG}
-          echo $DOCKER_IMAGE_TAG >> $GITHUB_ENV
+          echo DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG >> $GITHUB_ENV
           
       - name: Check the packages
         run: |
