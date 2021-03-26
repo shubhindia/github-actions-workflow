@@ -39,7 +39,7 @@ jobs:
 
       - name: Install virtualenv
         id: docker-op
-        if: github.ref == 'ref/head/master'
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           #pip install virtualenv
           #virtualenv venv
