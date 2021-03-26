@@ -52,6 +52,7 @@ jobs:
       - name: Check the packages
         run: |
           pip freeze
+          echo ${GITHUB_REF}
       - name: caching
         uses: actions/cache@v2
         with:
