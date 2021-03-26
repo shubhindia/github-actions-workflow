@@ -17,12 +17,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-18.04
-    services:
-      shcn:
-        image: shubhindia/shcn
-        credentials:
-          username: shubhindia
-          password: ${{ secrets.DOCKER_PASSWORD}}
+    #services:
+    #  shcn:
+    #    image: shubhindia/shcn
+    #    credentials:
+    #      username: shubhindia
+    #      password: ${{ secrets.DOCKER_PASSWORD}}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
