@@ -30,12 +30,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          repositoy: shubhindia/kustomize_monorepo
           
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.6.9'
           
+      - name: Checking files
+        run: ls -la
+        
       - name: Set up github environment variables
         uses: FranzDiebold/github-env-vars-action@v2
 
