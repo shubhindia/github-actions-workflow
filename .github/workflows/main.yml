@@ -23,6 +23,8 @@ jobs:
     #    credentials:
     #      username: shubhindia
     #      password: ${{ secrets.DOCKER_PASSWORD}}
+    env:
+      HOME: ${GITHUB_WORKSPACE}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
