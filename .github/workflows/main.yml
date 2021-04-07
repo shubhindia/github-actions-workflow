@@ -14,7 +14,7 @@ on:
       repo:
         description: 'Repo name'     
         required: true
-        default: ${{ github.repository }}
+        default: '${{ github.repository }}'
 
   # Allows you to run this workflow manually from the Actions tab
 
