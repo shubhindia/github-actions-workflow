@@ -15,6 +15,38 @@ on:
         description: 'Repo name'     
         required: true
         default: 'na'
+      MICROSERVICE:
+        description: 'Miroservice name'
+        required: true
+        default: 'na'
+      TAG:
+        description: 'Image tag'
+        required: true
+        default: 'na'
+      ENVIRONMENT:
+        description: 'Environment'
+        required: true
+        default: 'master'
+      REGION:
+        description: 'Region'
+        required: true
+        default: 'us'
+      BRANCH:
+        description: 'Deployment branch'
+        required: true
+        default: 'master'
+      TIMEOUT:
+        description: 'Helm timeout'
+        required: true
+        default: '300'
+      SMOKETEST_TIMEOUT:
+        description: 'Somketest Timeout'
+        required: true
+        default: '300'
+      SKIP_MIGRATIONS:
+        description: 'DB Migrations'
+        required: true
+        default: 'false'
 
   # Allows you to run this workflow manually from the Actions tab
 
@@ -44,6 +76,10 @@ jobs:
           
       - name: Checking files
         run: ls -la
+        
+      - name: Env debug
+        run: |
+          echo ${HELM_NAME} ${{ github.event.inputs.MICROSERVICE }} ${{ github.event.inputs.TAG }} ${{ github.event.inputs.ENVIRONMENT }} ${{ github.event.inputs.REGION }} ${{ github.event.inputs.BRANCH }} ${{ github.event.inputs.TIMEOUT }} ${{ github.event.inputs.SMOKETEST_TIMEOUT }} ${{ github.event.inputs.SMOKETEST_TIMEOUT }} ${{ github.event.inputs.SKIP_MIGRATIONS }}
         
       - name: Set up github environment variables
         uses: FranzDiebold/github-env-vars-action@v2
