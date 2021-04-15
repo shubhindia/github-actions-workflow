@@ -72,7 +72,7 @@ jobs:
           python-version: '3.6.9'
           
       - name: Checking files
-        run: echo ${contains(github.event.head_commit.message, 'BUILD_CONTAINER_IMAGE')}
+        run: echo ${{ contains(github.event.head_commit.message, 'BUILD_CONTAINER_IMAGE') }}
         
       - name: Env debug
         run: |
