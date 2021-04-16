@@ -35,88 +35,86 @@ jobs:
           #repository: ${{ github.event.inputs.repo }}
       - name: Log info and exit
         run: |
+          echo "running on"
           echo "${{ github.event.inputs.runner }}"
-          exit 1
           
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.6.9'
+      #- name: Setup Python
+      #  uses: actions/setup-python@v2
+      #  with:
+      #    python-version: '3.6.9'
           
-      - name: Checking files
-        run: echo ${{ contains(github.event.head_commit.message, 'BUILD_CONTAINER_IMAGE') }}
+      #- name: Checking files
+      #  run: echo ${{ contains(github.event.head_commit.message, 'BUILD_CONTAINER_IMAGE') }}
         
-      - name: Env debug
-        run: |
-          echo ${HELM_NAME} ${{ github.event.inputs.MICROSERVICE }} ${{ github.event.inputs.TAG }} ${{ github.event.inputs.ENVIRONMENT }} ${{ github.event.inputs.REGION }} ${{ github.event.inputs.BRANCH }} ${{ github.event.inputs.TIMEOUT }} ${{ github.event.inputs.SMOKETEST_TIMEOUT }} ${{ github.event.inputs.SMOKETEST_TIMEOUT }} ${{ github.event.inputs.SKIP_MIGRATIONS }}
+      #- name: Env debug
+      #  run: |
+      #    echo ${HELM_NAME} ${{ github.event.inputs.MICROSERVICE }} ${{ github.event.inputs.TAG }} ${{ github.event.inputs.ENVIRONMENT }} ${{ github.event.inputs.REGION }} ${{ github.event.inputs.BRANCH }} ${{ github.event.inputs.TIMEOUT }} ${{ github.event.inputs.SMOKETEST_TIMEOUT }} ${{ github.event.inputs.SMOKETEST_TIMEOUT }} ${{ github.event.inputs.SKIP_MIGRATIONS }}
         
-      - name: Set up github environment variables
-        uses: FranzDiebold/github-env-vars-action@v2
+      #- name: Set up github environment variables
+      #  uses: FranzDiebold/github-env-vars-action@v2
 
-      - name: Install virtualenv
-        id: docker-op
-        if: ${{ github.ref == 'refs/heads/master' }}
-        run: |
-          #pip install virtualenv
-          #virtualenv venv
-          #. venv/bin/activate
-          #pip install -r requirements.txt
-          DOCKER_IMAGE_TAG=$(date +%s)-${CI_SHA_SHORT}-${CI_REF_NAME_SLUG}
-          echo DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG >> $GITHUB_ENV
-          echo "::set-output name=mix-test::${DOCKER_IMAGE_TAG}"
+      #- name: Install virtualenv
+      #  id: docker-op
+      #  if: ${{ github.ref == 'refs/heads/master' }}
+      #  run: |
+       #   #pip install virtualenv
+       #   #virtualenv venv
+       #   #. venv/bin/activate
+       #   #pip install -r requirements.txt
+       #   DOCKER_IMAGE_TAG=$(date +%s)-${CI_SHA_SHORT}-${CI_REF_NAME_SLUG}
+       #   echo DOCKER_IMAGE_TAG=$DOCKER_IMAGE_TAG >> $GITHUB_ENV
+       #   echo "::set-output name=mix-test::${DOCKER_IMAGE_TAG}"
           
-      - name: Check the packages
-        run: |
-          pip freeze
-          echo ${GITHUB_REF}
-      - name: caching
-        uses: actions/cache@v2
-        with:
-          path: venv
-          key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
+      #- name: Check the packages
+      #  run: |
+      #    pip freeze
+      #    echo ${GITHUB_REF}
+      #- name: caching
+      #  uses: actions/cache@v2
+      #  with:
+      #    path: venv
+      #    key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
           
-      - name: Build and push Docker images 
-        run: |
-          #docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          #docker build -t shubhindia/gh-actions-test .
-          #docker push shubhindia/gh-actions-test
-          echo test_url/$docker-tag
-          echo $DOCKER_IMAGE_TAG
-          echo "google.com/test&TAG=${DOCKER_IMAGE_TAG}&ENVIRONMENT=master"
-          curl "https://www.google.com/search?q=${{ steps.docker-op.outputs.mix-test }}"
+      #- name: Build and push Docker images 
+      #  run: |
+      #    #docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      #    #docker build -t shubhindia/gh-actions-test .
+      #    #docker push shubhindia/gh-actions-test
+      #    echo test_url/$docker-tag
+      #    echo $DOCKER_IMAGE_TAG
+      #    echo "google.com/test&TAG=${DOCKER_IMAGE_TAG}&ENVIRONMENT=master"
+      #    curl "https://www.google.com/search?q=${{ steps.docker-op.outputs.mix-test }}"
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-18.04
+  #deploy:
+  #  needs: build
+  #  runs-on: ubuntu-18.04
 
-    steps:
-      - name: Early exit
-        run: exit 1
-      - name: Checkout code
-        uses: actions/checkout@v2
+    #steps:
+    #  - name: Checkout code
+    #    uses: actions/checkout@v2
+    #    
+    #  - name: Setup Python
+    #    uses: actions/setup-python@v2
+    #    with:
+    #      python-version: '3.6.9'
+          
+    #  - name: caching
+    #    uses: actions/cache@v2
+    #    with:
+    #      path: venv
+    #      key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
+          
+    #  - name: Activate virtual env and check the packages
+    #    run: |
+    #      . venv/bin/activate
+    #      pip freeze
         
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.6.9'
-          
-      - name: caching
-        uses: actions/cache@v2
-        with:
-          path: venv
-          key: ${{ env.pythonLocation }}-${{ hashFiles('requirements.txt') }}
-          
-      - name: Activate virtual env and check the packages
-        run: |
-          . venv/bin/activate
-          pip freeze
-        
-      - name: Set kubernetes context
-        uses: Azure/k8s-set-context@v1
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}
+    #  - name: Set kubernetes context
+    #    uses: Azure/k8s-set-context@v1
+    #    with:
+    #      method: kubeconfig
+    #      kubeconfig: ${{ secrets.KUBECONFIG }}
 
-      - name: Deploy the image in kubernetes
-        run: |
-          kubectl apply -f ntsuserservice-deployment.yaml
+     # - name: Deploy the image in kubernetes
+     #   run: |
+     #     kubectl apply -f ntsuserservice-deployment.yaml
