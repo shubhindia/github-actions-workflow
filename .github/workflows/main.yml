@@ -13,14 +13,14 @@ on:
       runner:
         description: 'runner name'     
         required: true
-        default: 'my-runner1'
+        default: 'test-label1'
 
   # Allows you to run this workflow manually from the Actions tab
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    runs-on: my-runner1
+    runs-on: test-label1
     #services:
     #  shcn:
     #    image: shubhindia/shcn
