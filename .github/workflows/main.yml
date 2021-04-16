@@ -10,49 +10,17 @@ on:
     branches: [ master ]
   workflow_dispatch:
     inputs:
-      repo:
-        description: 'Repo name'     
+      runner:
+        description: 'runner name'     
         required: true
-        default: 'na'
-      MICROSERVICE:
-        description: 'Miroservice name'
-        required: true
-        default: 'na'
-      TAG:
-        description: 'Image tag'
-        required: true
-        default: 'na'
-      ENVIRONMENT:
-        description: 'Environment'
-        required: true
-        default: 'master'
-      REGION:
-        description: 'Region'
-        required: true
-        default: 'us'
-      BRANCH:
-        description: 'Deployment branch'
-        required: true
-        default: 'master'
-      TIMEOUT:
-        description: 'Helm timeout'
-        required: true
-        default: '300'
-      SMOKETEST_TIMEOUT:
-        description: 'Somketest Timeout'
-        required: true
-        default: '300'
-      SKIP_MIGRATIONS:
-        description: 'DB Migrations'
-        required: true
-        default: 'false'
+        default: 'my-runner1'
 
   # Allows you to run this workflow manually from the Actions tab
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: my-runner1
     #services:
     #  shcn:
     #    image: shubhindia/shcn
