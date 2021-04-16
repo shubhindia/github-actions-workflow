@@ -33,6 +33,10 @@ jobs:
         with:
           fetch-depth: 0
           #repository: ${{ github.event.inputs.repo }}
+      - name: Log info and exit
+        run: |
+          echo "${{ github.event.inputs.runner }}"
+          exit 1
           
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -86,6 +90,8 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
+      - name: Early exit
+        run: exit 1
       - name: Checkout code
         uses: actions/checkout@v2
         
