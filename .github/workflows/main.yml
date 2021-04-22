@@ -21,4 +21,4 @@ jobs:
 
       - name: Docker image pull
         run: |
-          time docker pull shubhindia/wso2km:5.7
+          time docker pull shubhindia/wso2km:latest
