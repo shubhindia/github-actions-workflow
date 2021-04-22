@@ -1,17 +1,8 @@
-# This is a basic workflow to help you get started with Actions
+name: docker-cache
 
-name: CI
-
-# Controls when the action will run. 
 on:
   push:
-  pull_request:
-    branches: [ master ]
 
-
-  # Allows you to run this workflow manually from the Actions tab
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
     runs-on: ubuntu-18.04
@@ -27,7 +18,7 @@ jobs:
         with:
           path: /var/lib/docker/
           key: ${{ runner.os }}
-          
+
       - name: Docker image pull
         run: |
           time docker pull shubhindia/wso2km:5.7
