@@ -34,5 +34,5 @@ jobs:
 
       - name: Some maths here
         run: |
-          divnum=$(100 / ${{ strategy.job-total }})
+          divnum=$( expr 100 / ${{ strategy.job-total }})
           echo $divnum
