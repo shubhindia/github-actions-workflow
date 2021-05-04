@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: docker-self-hosted
+    strategy:
+      matrix:
+        job: [0,1]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,4 +29,4 @@ jobs:
           time docker pull shubhindia/wso2km:latest
 
       - name: Test exit
-        run: exit 4
+        run: echo ${{ strategy.job-total }}
