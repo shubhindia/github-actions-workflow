@@ -9,6 +9,7 @@ jobs:
   build:
     runs-on: docker-self-hosted
     strategy:
+      max-parallel: 1
       matrix:
         job: [0,1]
     steps:
