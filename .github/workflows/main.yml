@@ -17,7 +17,7 @@ jobs:
         id: docker-cache
         with:
           path: /var/lib/docker
-          key: ${{ runner.os }}-self-hosted
+          key: ${{ runner.os }}-self-hosted-1
 
       - name: Docker image pull
         run: |
