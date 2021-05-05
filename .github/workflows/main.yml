@@ -30,9 +30,22 @@ jobs:
           time docker pull shubhindia/wso2km:latest
 
       - name: Test exit
-        run: echo ${{ strategy.job-total }}
+        run: |
+          if [[ ${{ matrix.job }} == '0' ]]
+          then
+            exit 1
+          else
+            echo ${{ matrix.job }}
+          fi
 
       - name: Some maths here
         run: |
           divnum=$( expr 100 / ${{ strategy.job-total }})
           echo $divnum
+
+  Coveralls:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Just placebo
+        run: echo "Coveralls""
