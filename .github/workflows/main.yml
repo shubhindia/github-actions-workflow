@@ -5,33 +5,19 @@ on:
 
 jobs:
   build:
-    runs-on: docker-self-hosted
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Set up github environment variables
-        uses: FranzDiebold/github-env-vars-action@v2
-      
-      - name: Testing
-        env:
-          CI_ID: ${{ env.CI_REF_NAME }}
-        run: |
-          echo ${CI_ID}
-          BRANCH=${CI_REF_NAME}
-          echo $BRANCH
-          echo ${CI_SHA_SHORT}
-          SHA=${CI_SHA_SHORT}
-          echo $SHA
-
       - name: Docker Caching
         uses: actions/cache@v2
         id: docker-cache
         with:
-          path: /var/lib/docker/
-          key: ${{ runner.os }}-1
+          path: /var/lib/docker
+          key: ${{ runner.os }}-self-hosted
 
       - name: Docker image pull
         run: |
