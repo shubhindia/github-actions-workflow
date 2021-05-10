@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: test-label1
+    runs-on: shubhi-vps
     container:
       image: gcr.io/google-containers/alpine-iptables-arm
     steps:
