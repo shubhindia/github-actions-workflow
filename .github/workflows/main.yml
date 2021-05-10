@@ -6,19 +6,12 @@ on:
 jobs:
   build:
     runs-on: test-label1
+    container:
+      image: gcr.io/google-containers/alpine-iptables-arm
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Docker Caching
-        uses: actions/cache@v2
-        id: docker-cache
-        with:
-          path: /var/lib/docker
-          key: ${{ runner.os }}-self-hosted-2
-
-      - name: Docker image pull
-        run: |
-          time docker pull shubhindia/wso2am:latest
+          
