@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: shubhi-vps
     container:
-      image: gcr.io/google-containers/alpine-iptables-arm
+      image: gcr.io/google-containers/addon-builder
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
