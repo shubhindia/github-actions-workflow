@@ -15,4 +15,4 @@ jobs:
         uses: actions/cache@v2
         with:
           path: api
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles'. '**/gemfile') }}
