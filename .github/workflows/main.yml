@@ -5,14 +5,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Cache
-        uses: actions/cache@v2
-        with:
-          path: api
-          key: ${{ runner.os }}-${{ hashFiles('**/lockfiles', '**/gemfile') }}
+      - name: Check exit
+        run: exit 4
