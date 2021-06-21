@@ -12,4 +12,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Check exit
-        run: exit 4
+        run: exit 0
