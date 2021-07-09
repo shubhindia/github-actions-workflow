@@ -6,10 +6,14 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    container:
+      image: python:3.6.9-stretch
+      volumes:
+        - /home/runner/test_dir
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Check exit
-        run: exit 0
+      - name: List files
+        run: ls -la
